@@ -14,9 +14,9 @@ describe("Fab Curtains & Blinds cleaning landing page", () => {
       screen.getByRole("link", { name: /get photo estimate/i })
     ).toBeInTheDocument();
     expect(screen.getByText(/curtain cleaning/i)).toBeInTheDocument();
-    expect(screen.getByText(/blind cleaning/i)).toBeInTheDocument();
-    expect(screen.getByText(/ai photo estimate/i)).toBeInTheDocument();
-    expect(screen.getByText(/confidence rating/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/blind cleaning/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/ai photo estimate/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/confidence rating/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByTestId("gallery-card")).toHaveLength(6);
     expect(screen.queryByText(/supply/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/installation/i)).not.toBeInTheDocument();
