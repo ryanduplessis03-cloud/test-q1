@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Roller blind mechanism">
+  <rect width="640" height="420" fill="#f5f6f8"/>
+  <rect x="60" y="72" width="520" height="42" rx="20" fill="#fff"/>
+  <circle cx="530" cy="92" r="36" fill="#d9dee6"/>
+  <circle cx="530" cy="92" r="22" fill="#fff"/>
+  <rect x="100" y="116" width="420" height="198" rx="12" fill="#ddd6cb"/>
+  <rect x="100" y="264" width="420" height="48" fill="#1f2530" opacity=".88"/>
+  <path d="M560 124 C548 172 578 220 560 268 C546 308 574 334 558 368" fill="none" stroke="#9aa1aa" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="548" cy="62" r="10" fill="#e11d2e"/>
+</svg>

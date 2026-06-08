@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Outdoor screen blinds">
+  <rect width="640" height="420" fill="#dce8ef"/>
+  <rect x="48" y="42" width="544" height="320" rx="26" fill="#9ab1bf"/>
+  <path d="M70 318 C180 260 252 286 344 218 C428 156 510 172 578 110 V362 H70Z" fill="#52636c" opacity=".55"/>
+  <rect x="76" y="56" width="10" height="294" rx="5" fill="#fff" opacity=".8"/>
+  <rect x="554" y="56" width="10" height="294" rx="5" fill="#fff" opacity=".8"/>
+  <rect x="86" y="348" width="468" height="7" rx="4" fill="#fff" opacity=".9"/>
+  <circle cx="548" cy="68" r="10" fill="#e11d2e"/>
+</svg>

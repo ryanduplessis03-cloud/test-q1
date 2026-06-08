@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Fallback curtain and blind preview">
+  <rect width="640" height="420" fill="#f7f7f9"/>
+  <rect x="52" y="42" width="536" height="320" rx="28" fill="#fff"/>
+  <g fill="#d8dee8">
+    <rect x="82" y="84" width="476" height="12" rx="6"/><rect x="82" y="122" width="476" height="12" rx="6"/>
+    <rect x="82" y="160" width="476" height="12" rx="6"/><rect x="82" y="198" width="476" height="12" rx="6"/>
+    <rect x="82" y="236" width="476" height="12" rx="6"/><rect x="82" y="274" width="476" height="12" rx="6"/>
+  </g>
+  <circle cx="548" cy="62" r="10" fill="#e11d2e"/>
+  <text x="84" y="350" fill="#071024" font-family="Arial, sans-serif" font-size="24" font-weight="700">Preview image</text>
+</svg>

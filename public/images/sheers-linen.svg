@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Soft sheer curtains">
+  <rect width="640" height="420" fill="#f8f3ea"/>
+  <rect x="54" y="36" width="532" height="340" rx="26" fill="#fff" opacity=".72"/>
+  <g fill="none" stroke="#d8d0c2" stroke-width="16" opacity=".62">
+    <path d="M92 52 C112 120 82 214 102 354"/><path d="M134 52 C154 120 124 214 144 354"/>
+    <path d="M176 52 C196 120 166 214 186 354"/><path d="M218 52 C238 120 208 214 228 354"/>
+    <path d="M260 52 C280 120 250 214 270 354"/><path d="M302 52 C322 120 292 214 312 354"/>
+    <path d="M344 52 C364 120 334 214 354 354"/><path d="M386 52 C406 120 376 214 396 354"/>
+    <path d="M428 52 C448 120 418 214 438 354"/><path d="M470 52 C490 120 460 214 480 354"/>
+  </g>
+  <circle cx="548" cy="62" r="10" fill="#e11d2e"/>
+</svg>

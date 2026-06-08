@@ -1,343 +1,345 @@
+import { useEffect, type SyntheticEvent } from "react";
 import {
-  Aperture,
   BadgeCheck,
   Camera,
-  CheckCircle2,
   ChevronRight,
   ClipboardCheck,
-  Gauge,
+  ImageOff,
   MessageCircle,
   Ruler,
   ShieldCheck,
   Sparkles,
-  UploadCloud
+  UploadCloud,
+  WandSparkles,
+  Zap
 } from "lucide-react";
 
-const services = [
-  {
-    title: "Curtain cleaning",
-    description: "Freshen heavy drapes, soft sheers, and delicate fabrics with careful cleaning guidance.",
-    icon: Sparkles
-  },
-  {
-    title: "Blind cleaning",
-    description: "Assess Venetian, roller, wooden-look, and layered blinds from customer photos.",
-    icon: Aperture
-  },
-  {
-    title: "Deep dust removal",
-    description: "Flag heavy dust, stains, and fabric concerns before the team confirms the quote.",
-    icon: ShieldCheck
-  }
-];
+type GalleryItem = {
+  title: string;
+  tag: string;
+  image: string;
+};
 
-const galleryItems = [
+const styleCards = [
   {
-    title: "White shutter-style blinds",
-    tag: "Bright kitchen finish",
-    className: "gallery-card--white"
+    title: "Roller blinds",
+    detail: "Flat fabric surfaces, dust build-up, stain checks, and mechanism-safe care."
   },
   {
-    title: "Outdoor screen blinds",
-    tag: "Large drop assessment",
-    className: "gallery-card--screen"
+    title: "Venetian blinds",
+    detail: "Slat-by-slat cleaning assessment for aluminium, faux wood, and wooden-look finishes."
   },
   {
-    title: "Wooden-look blinds",
-    tag: "Slat-by-slat care",
-    className: "gallery-card--wood"
+    title: "Day and night blinds",
+    detail: "Layered fabric review for dust, handling marks, and delicate cassette areas."
   },
   {
-    title: "Grey blockout curtains",
-    tag: "Fabric depth review",
-    className: "gallery-card--grey"
+    title: "Wide format blinds",
+    detail: "Large patio or stacking-door coverings with AI-assisted width and drop estimates."
   },
   {
     title: "Sheer curtains",
-    tag: "Light fabric refresh",
-    className: "gallery-card--sheer"
+    detail: "Soft fabric refresh for light-filtering curtains where gentle handling matters."
   },
   {
-    title: "Roller blind system",
-    tag: "Mechanism-friendly clean",
-    className: "gallery-card--roller"
+    title: "Blockout curtains",
+    detail: "Heavier fabric review for deep dust, odour, stains, and room-darkening material."
   }
 ];
 
-const trustPoints = [
-  "Photo-assisted cleaning quotes",
-  "Helpful for customers who cannot measure",
-  "Careful handling for delicate fabrics",
-  "Residential and commercial cleaning",
-  "Team review before final confirmation"
+const galleryItems: GalleryItem[] = [
+  { title: "White shutter blinds", tag: "Kitchen brightness", image: "/images/blinds-white.svg" },
+  { title: "Outdoor screen blinds", tag: "Large drop review", image: "/images/screen-blinds.svg" },
+  { title: "Wooden-look blinds", tag: "Warm slat finish", image: "/images/wood-blinds.svg" },
+  { title: "Grey blockout curtains", tag: "Heavy fabric check", image: "/images/curtains-grey.svg" },
+  { title: "Soft sheer curtains", tag: "Light fabric care", image: "/images/sheers-linen.svg" },
+  { title: "Roller blind mechanism", tag: "Close-up assessment", image: "/images/roller-mechanism.svg" },
+  { title: "Layered day-night blind", tag: "Striped privacy fabric", image: "/images/day-night-blinds.svg" },
+  { title: "Large lounge curtains", tag: "Full wall estimate", image: "/images/lounge-curtains.svg" },
+  { title: "Deep-clean request", tag: "Dust and stain notes", image: "/images/deep-clean.svg" },
+  { title: "Commercial blind panels", tag: "Multiple-window quote", image: "/images/commercial-panels.svg" }
 ];
 
 const processSteps = [
   {
-    title: "Upload a photo",
-    description: "The customer takes a straight, well-lit picture of the curtain or blind.",
+    title: "Choose the covering type",
+    description: "The flow starts with curtain, blind, sheer, roller, or wide-format selection.",
+    icon: WandSparkles
+  },
+  {
+    title: "Upload clear photos",
+    description: "Customers add a full image and optional close-ups of stains, dust, or damage.",
     icon: UploadCloud
   },
   {
-    title: "AI estimates size",
-    description: "The assistant reads the photo, detects the covering type, and estimates width and drop.",
+    title: "AI estimates measurements",
+    description: "The assistant estimates width, drop, condition, and a confidence rating.",
     icon: Ruler
   },
   {
-    title: "Confidence rating",
-    description: "The system marks the estimate as high, medium, or needs team review.",
-    icon: Gauge
-  },
-  {
-    title: "Team confirms quote",
-    description: "The business receives the photo, condition notes, and estimate before booking.",
+    title: "Team reviews the quote",
+    description: "The business receives the images, AI notes, and customer contact details.",
     icon: ClipboardCheck
   }
 ];
 
-const faqs = [
-  {
-    question: "Do customers need exact measurements?",
-    answer: "No. The AI photo estimate helps customers who cannot measure, then the team reviews the result."
-  },
-  {
-    question: "What should the customer photograph?",
-    answer: "The full curtain or blind, a close-up of stains or dust, and a reference object when possible."
-  },
-  {
-    question: "How accurate is the AI estimate?",
-    answer: "It provides a practical estimate with a confidence rating, not a final guarantee."
-  }
+const trustCards = [
+  "Fast static preview ready",
+  "Smooth scroll preview",
+  "Real image elements with fallbacks",
+  "Photo-assisted estimates",
+  "Cleaning-only service message",
+  "WhatsApp-friendly quote path"
 ];
 
+const fallbackImage = "/images/fallback.svg";
+
+function handleImageError(event: SyntheticEvent<HTMLImageElement>) {
+  if (event.currentTarget.dataset.fallbackApplied === "true") {
+    return;
+  }
+
+  event.currentTarget.dataset.fallbackApplied = "true";
+  event.currentTarget.src = fallbackImage;
+  event.currentTarget.closest(".gallery-card, .hero-showcase")?.classList.add("image-fallback");
+}
+
+function useScrollReveal() {
+  useEffect(() => {
+    const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
+}
+
 export default function App() {
+  useScrollReveal();
+
   return (
     <main className="site-shell">
-      <nav className="topbar" aria-label="Main navigation">
-        <a className="brand" href="#home" aria-label="Fab Curtains and Blinds cleaning home">
-          <span className="brand-mark">fab</span>
-          <span className="brand-divider" />
-          <span className="brand-copy">
-            Curtains
-            <small>& Blinds Cleaning</small>
-          </span>
-        </a>
-        <div className="nav-links">
-          <a href="#services">Services</a>
-          <a href="#photo-estimate">AI estimate</a>
-          <a href="#gallery">Gallery</a>
-          <a href="#book" className="nav-cta">Book</a>
-        </div>
-      </nav>
-
-      <section id="home" className="hero-section">
-        <div className="hero-copy">
-          <p className="eyebrow">Red & white premium cleaning experience</p>
-          <h1>Expert Curtain & Blind Cleaning Made Simple</h1>
-          <p className="hero-lead">
-            Upload a photo, let our smart assistant estimate the size and condition,
-            and request a professional cleaning quote without struggling to measure.
-          </p>
-          <div className="hero-actions">
-            <a className="button button-primary" href="#photo-estimate">
-              Get Photo Estimate
-              <ChevronRight size={18} aria-hidden="true" />
-            </a>
-            <a className="button button-secondary" href="#gallery">
-              View Cleaning Gallery
-            </a>
+      <header className="hero" id="home">
+        <nav className="topbar" aria-label="Main navigation">
+          <a className="brand" href="#home" aria-label="Fab Curtains and Blinds cleaning home">
+            <span className="brand-mark">fab</span>
+            <span className="brand-copy">
+              Curtains & Blinds
+              <small>Cleaning estimates</small>
+            </span>
+          </a>
+          <div className="nav-links">
+            <a href="#styles">Styles</a>
+            <a href="#photo-estimate">AI estimate</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#quote" className="nav-cta">Quote</a>
           </div>
-          <div className="hero-proof" aria-label="Service highlights">
-            <span>
-              <BadgeCheck size={18} aria-hidden="true" /> Cleaning specialists
-            </span>
-            <span>
-              <Camera size={18} aria-hidden="true" /> Photo-first quoting
-            </span>
-            <span>
-              <MessageCircle size={18} aria-hidden="true" /> WhatsApp-ready flow
-            </span>
-          </div>
-        </div>
+        </nav>
 
-        <div className="hero-visual" aria-label="Curtain and blind cleaning preview">
-          <div className="hero-window-card">
-            <div className="window-frame">
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
+        <section className="hero-grid section-wrap" data-reveal>
+          <div className="hero-copy">
+            <p className="eyebrow">Red / white cleaning website rebuild</p>
+            <h1>Curtain & Blind Cleaning That Starts With a Photo</h1>
+            <p className="hero-lead">
+              A faster, image-rich booking page for customers who cannot measure.
+              They choose the covering type, upload photos, and let the AI estimate
+              size, condition, and cleaning difficulty before the team confirms.
+            </p>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#quote">
+                Request a Cleaning Quote
+                <ChevronRight size={18} aria-hidden="true" />
+              </a>
+              <a className="button button-ghost" href="#gallery">
+                View gallery flow
+              </a>
             </div>
-            <div className="hero-image-caption">
-              <strong>Can’t measure?</strong>
-              <small>Send the photo. The assistant does the first estimate.</small>
+            <div className="hero-stats" aria-label="Website improvements">
+              <span><Zap size={18} aria-hidden="true" /> Fast static preview ready</span>
+              <span><Camera size={18} aria-hidden="true" /> More picture cards</span>
+              <span><BadgeCheck size={18} aria-hidden="true" /> Cleaning-only focus</span>
             </div>
           </div>
-          <div className="floating-card">
-            <span className="pulse-dot" />
-            AI scan ready
-          </div>
-        </div>
-      </section>
 
-      <section id="services" className="section section-light">
-        <div className="section-heading">
-          <p className="eyebrow">Cleaning services</p>
-          <h2>Focused only on curtains and blinds</h2>
-          <p>
-            The website stays clear and direct: customers quickly understand what can
-            be cleaned, then move into the photo estimate flow.
-          </p>
-        </div>
-        <div className="service-grid">
-          {services.map((service) => {
-            const Icon = service.icon;
-            return (
-              <article className="service-card" key={service.title}>
-                <div className="icon-bubble">
-                  <Icon size={26} aria-hidden="true" />
-                </div>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
+          <div className="hero-showcase" role="group" aria-label="AI photo estimate preview">
+            <img
+              src="/images/blinds-white.svg"
+              alt="Bright white blinds preview"
+              className="hero-image hero-image-main"
+              decoding="async"
+              onError={handleImageError}
+            />
+            <img
+              src="/images/sheers-linen.svg"
+              alt="Soft sheer curtain preview"
+              className="hero-image hero-image-overlap"
+              decoding="async"
+              loading="lazy"
+              onError={handleImageError}
+            />
+            <div className="scan-card">
+              <span className="scan-dot" />
+              <strong>AI scan</strong>
+              <small>2.4m W x 2.1m H · medium confidence</small>
+            </div>
+          </div>
+        </section>
+      </header>
+
+      <section className="section section-soft" id="styles" data-reveal>
+        <div className="section-wrap">
+          <div className="section-heading split-heading">
+            <div>
+              <p className="eyebrow">Galaxy-style category browsing</p>
+              <h2>Choose the covering type before the quote starts</h2>
+            </div>
+            <p>
+              The UI borrows the flexible category rhythm from blind product pages,
+              but keeps the message focused on cleaning, photo review, and estimate confidence.
+            </p>
+          </div>
+          <div className="style-grid">
+            {styleCards.map((card) => (
+              <article className="style-card" data-testid="style-card" key={card.title}>
+                <span className="style-number">{String(styleCards.indexOf(card) + 1).padStart(2, "0")}</span>
+                <h3>{card.title}</h3>
+                <p>{card.detail}</p>
               </article>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="photo-estimate" className="section photo-estimate-section">
-        <div className="estimate-panel">
+      <section className="section photo-section" id="photo-estimate" data-reveal>
+        <div className="section-wrap estimate-grid">
           <div>
             <p className="eyebrow">AI Photo Estimate</p>
-            <h2>Customers who cannot measure can still request help</h2>
+            <h2>Measure from the picture when the customer cannot</h2>
             <p>
-              The booking assistant asks for a full photo, checks the type of
-              curtain or blind, estimates the width and drop, reviews visible
-              condition, and sends everything to the team.
+              The assistant guides customers to take a straight, full-frame photo,
+              then estimates width, drop, covering type, condition level, and confidence rating.
+              Low-confidence requests are flagged for human review.
             </p>
-            <div className="estimate-tags" aria-label="AI estimate output">
+            <div className="estimate-tags">
               <span>Width estimate</span>
               <span>Drop estimate</span>
-              <span>Item type</span>
               <span>Condition level</span>
               <span>Confidence rating</span>
+              <span>Team review</span>
             </div>
           </div>
-          <div className="phone-mockup" aria-label="Photo estimate form preview">
-            <div className="phone-top" />
-            <div className="upload-zone">
-              <Camera size={34} aria-hidden="true" />
-              <strong>Take or upload photo</strong>
-              <small>Full curtain/blind in frame</small>
-            </div>
-            <div className="scan-result">
-              <span>Estimated size</span>
-              <strong>2.4m W x 2.1m H</strong>
-              <small>Medium confidence - team review</small>
-            </div>
+          <div className="estimate-device" role="group" aria-label="Photo estimate booking flow preview">
+            {processSteps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <article className="estimate-step" key={step.title}>
+                  <Icon size={20} aria-hidden="true" />
+                  <div>
+                    <strong>{index + 1}. {step.title}</strong>
+                    <small>{step.description}</small>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section id="gallery" className="section">
-        <div className="section-heading section-heading-split">
-          <div>
-            <p className="eyebrow">Visual proof</p>
-            <h2>Gallery built for high-quality business images</h2>
-          </div>
-          <p>
-            These six image slots match the photos you shared: shutters, screens,
-            wooden blinds, grey curtains, sheer curtains, and roller systems.
-          </p>
-        </div>
-        <div className="gallery-grid">
-          {galleryItems.map((item) => (
-            <article
-              className={`gallery-card ${item.className}`}
-              data-testid="gallery-card"
-              key={item.title}
-            >
-              <div className="gallery-lines" aria-hidden="true" />
-              <div className="gallery-overlay">
-                <span>{item.tag}</span>
-                <h3>{item.title}</h3>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section section-light process-section">
-        <div className="section-heading">
-          <p className="eyebrow">How it works</p>
-          <h2>A cleaner booking journey than the competition</h2>
-        </div>
-        <div className="process-grid">
-          {processSteps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <article className="process-card" key={step.title}>
-                <span className="step-number">0{index + 1}</span>
-                <Icon size={25} aria-hidden="true" />
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="section trust-section">
-        <div className="trust-card">
-          <div>
-            <p className="eyebrow">Why choose us</p>
-            <h2>Premium look, simple customer action</h2>
+      <section className="section" id="gallery" data-reveal>
+        <div className="section-wrap">
+          <div className="section-heading split-heading">
+            <div>
+              <p className="eyebrow">Picture-heavy proof</p>
+              <h2>More visual options, with fallback images if files fail</h2>
+            </div>
             <p>
-              The red-and-white theme keeps the website bold and memorable, while
-              the image-led layout builds trust before the customer books.
+              The image cards are real lazy-loaded images, not background-only placeholders.
+              That makes the gallery easier to replace with final business photos later.
             </p>
           </div>
-          <ul>
-            {trustPoints.map((point) => (
-              <li key={point}>
-                <CheckCircle2 size={19} aria-hidden="true" />
-                {point}
-              </li>
+          <div className="gallery-grid">
+            {galleryItems.map((item) => (
+              <article className="gallery-card" data-testid="gallery-card" key={item.title}>
+                <img
+                  data-testid="gallery-image"
+                  src={item.image}
+                  alt={`${item.title} cleaning preview`}
+                  loading="lazy"
+                  decoding="async"
+                  onError={handleImageError}
+                />
+                <div className="gallery-overlay">
+                  <span>{item.tag}</span>
+                  <h3>{item.title}</h3>
+                </div>
+              </article>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
-      <section className="section faq-section">
-        <div className="section-heading">
-          <p className="eyebrow">Questions answered early</p>
-          <h2>Remove friction before they book</h2>
-        </div>
-        <div className="faq-grid">
-          {faqs.map((faq) => (
-            <article className="faq-card" key={faq.question}>
-              <h3>{faq.question}</h3>
-              <p>{faq.answer}</p>
-            </article>
-          ))}
+      <section className="section section-soft" data-reveal>
+        <div className="section-wrap trust-layout">
+          <div>
+            <p className="eyebrow">CNBW-inspired quote confidence</p>
+            <h2>Cleaner path to trust, samples of work, and quote action</h2>
+            <p>
+              The layout keeps a strong call-to-action like a commerce site, but avoids
+              product clutter. Every block pushes the customer toward a photo-based cleaning request.
+            </p>
+          </div>
+          <div className="trust-grid">
+            {trustCards.map((point) => (
+              <div className="trust-pill" key={point}>
+                <ShieldCheck size={18} aria-hidden="true" />
+                {point}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="book" className="booking-cta">
-        <div>
-          <p className="eyebrow">Ready for the next build phase</p>
-          <h2>Book with a photo estimate</h2>
-          <p>
-            This preview shows the full direction. The next step is connecting the
-            form to real photo uploads, AI estimation, and team notifications.
-          </p>
+      <section className="section quote-section" id="quote" data-reveal>
+        <div className="section-wrap quote-card">
+          <div>
+            <p className="eyebrow">Ready to review the program</p>
+            <h2>Request a quote with photos, notes, and AI measurement help</h2>
+            <p>
+              Next build step: connect this visual flow to upload storage, AI measurement
+              analysis, WhatsApp/email notifications, and an admin review inbox.
+            </p>
+          </div>
+          <a
+            className="button button-primary button-light"
+            href="https://wa.me/27608123586?text=Hi%20Fab%20Curtains%20%26%20Blinds%2C%20I%20would%20like%20a%20cleaning%20photo%20estimate."
+          >
+            Start photo estimate
+          </a>
         </div>
-        <a className="button button-primary button-inverted" href="#photo-estimate">
-          Start Photo Estimate
-        </a>
       </section>
+
+      <footer className="footer">
+        <span>Fab Curtains & Blinds cleaning preview</span>
+        <span><MessageCircle size={16} aria-hidden="true" /> WhatsApp-ready booking concept</span>
+        <span><ImageOff size={16} aria-hidden="true" /> Fallback-safe gallery</span>
+      </footer>
     </main>
   );
 }
