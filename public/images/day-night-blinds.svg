@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Layered day-night blinds">
+  <rect width="640" height="420" fill="#e8ebef"/>
+  <rect x="50" y="38" width="540" height="330" rx="28" fill="#fff"/>
+  <g>
+    <rect x="78" y="76" width="484" height="24" rx="8" fill="#707781" opacity=".75"/>
+    <rect x="78" y="112" width="484" height="24" rx="8" fill="#f8f8f8" opacity=".9"/>
+    <rect x="78" y="148" width="484" height="24" rx="8" fill="#707781" opacity=".75"/>
+    <rect x="78" y="184" width="484" height="24" rx="8" fill="#f8f8f8" opacity=".9"/>
+    <rect x="78" y="220" width="484" height="24" rx="8" fill="#707781" opacity=".75"/>
+    <rect x="78" y="256" width="484" height="24" rx="8" fill="#f8f8f8" opacity=".9"/>
+    <rect x="78" y="292" width="484" height="24" rx="8" fill="#707781" opacity=".75"/>
+  </g>
+  <circle cx="548" cy="62" r="10" fill="#e11d2e"/>
+</svg>
