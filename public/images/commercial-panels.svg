@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Commercial blind panels">
+  <rect width="640" height="420" fill="#dce8ef"/>
+  <rect x="44" y="36" width="552" height="338" rx="26" fill="#fff" opacity=".82"/>
+  <g>
+    <rect x="72" y="66" width="84" height="276" rx="12" fill="#9ab1bf"/>
+    <rect x="172" y="66" width="84" height="276" rx="12" fill="#e8eef2"/>
+    <rect x="272" y="66" width="84" height="276" rx="12" fill="#9ab1bf"/>
+    <rect x="372" y="66" width="84" height="276" rx="12" fill="#e8eef2"/>
+    <rect x="472" y="66" width="84" height="276" rx="12" fill="#9ab1bf"/>
+  </g>
+  <rect x="72" y="350" width="484" height="8" rx="4" fill="#071024" opacity=".18"/>
+  <circle cx="548" cy="62" r="10" fill="#e11d2e"/>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Grey blockout curtains">
+  <rect width="640" height="420" fill="#d7d9dd"/>
+  <rect x="50" y="34" width="540" height="342" rx="28" fill="#eef0f4"/>
+  <g fill="none" stroke-width="22">
+    <path d="M96 54 C126 128 80 238 114 358" stroke="#7d838b"/>
+    <path d="M150 54 C180 128 134 238 168 358" stroke="#b8bec5"/>
+    <path d="M204 54 C234 128 188 238 222 358" stroke="#828891"/>
+    <path d="M258 54 C288 128 242 238 276 358" stroke="#c6cbd1"/>
+    <path d="M312 54 C342 128 296 238 330 358" stroke="#80868e"/>
+    <path d="M366 54 C396 128 350 238 384 358" stroke="#c1c6cc"/>
+    <path d="M420 54 C450 128 404 238 438 358" stroke="#777e87"/>
+    <path d="M474 54 C504 128 458 238 492 358" stroke="#b7bdc4"/>
+  </g>
+  <circle cx="548" cy="62" r="10" fill="#e11d2e"/>
+</svg>

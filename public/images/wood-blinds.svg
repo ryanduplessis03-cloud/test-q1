@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Wooden-look blinds">
+  <rect width="640" height="420" fill="#ead6bd"/>
+  <rect x="44" y="34" width="552" height="340" rx="28" fill="#f5e5d0"/>
+  <g fill="#a8754d">
+    <rect x="70" y="74" width="500" height="14" rx="7"/><rect x="70" y="108" width="500" height="14" rx="7"/>
+    <rect x="70" y="142" width="500" height="14" rx="7"/><rect x="70" y="176" width="500" height="14" rx="7"/>
+    <rect x="70" y="210" width="500" height="14" rx="7"/><rect x="70" y="244" width="500" height="14" rx="7"/>
+    <rect x="70" y="278" width="500" height="14" rx="7"/><rect x="70" y="312" width="500" height="14" rx="7"/>
+  </g>
+  <path d="M100 92 H530 M112 226 H548 M86 294 H500" stroke="#6f492e" stroke-width="3" opacity=".25"/>
+  <circle cx="548" cy="62" r="10" fill="#e11d2e"/>
+</svg>
